@@ -118,30 +118,30 @@ export const southwestAirlines = async (
     await page.fill('input[name="fName"]', "Anthony");
     await page.fill('input[name="lName"]', "Rassi");
 
-    // await page.click(".hc-expense-entry-submit");
-    // await page.waitForTimeout(1000);
-    // await page.click('.hc-confirmation-button:has-text("Confirm")');
+    await page.click(".hc-expense-entry-submit");
+    await page.waitForTimeout(1000);
+    await page.click('.hc-confirmation-button:has-text("Confirm")');
 
-    // await page.waitForTimeout(2000);
-    // const element = await page.locator(".slds-p-bottom_small");
+    await page.waitForTimeout(2000);
+    const element = await page.locator(".slds-p-bottom_small");
 
-    // if ((await element.count()) > 0) {
-    //   const bodyContent = await element.innerHTML();
-    //   console.log(bodyContent);
+    if ((await element.count()) > 0) {
+      const bodyContent = await element.innerHTML();
+      console.log(bodyContent);
 
-    //   res.json({
-    //     status: "success",
-    //     message: bodyContent,
-    //   });
-    // } else {
-    //   return res.status(500).json({
-    //     status: "error",
-    //     message: "Something went wrong. Form was not submitted.",
-    //   });
-    // }
+      res.json({
+        status: "success",
+        message: bodyContent,
+      });
+    } else {
+      return res.status(500).json({
+        status: "error",
+        message: "Something went wrong. Form was not submitted.",
+      });
+    }
 
-    // await page.close();
-    // await browser.close();
+    await page.close();
+    await browser.close();
   } catch (error) {
     return res.status(500).json({
       status: "error",
