@@ -102,6 +102,7 @@ export const southwestAirlines = async (
 
     await page.click(".hc-flight-entry-next");
     await page.waitForTimeout(2000);
+    await page.screenshot({ path: "screenshot_1.png" });
 
     if (value.flight_cancellation) {
       await page
