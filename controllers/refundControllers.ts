@@ -31,7 +31,7 @@ export const southwestAirlines = async (
     }
 
     const browser = await chromium.connectOverCDP(
-      "wss://chrome.browserless.io?token=R3ZBw9DXWbO8SH05875e4e922e00a76c11368ea7a2"
+      "wss://chrome.browserless.io?token=R3qrs0uAYrwFeO2c83126582824d815033dd6bd7e1"
     );
 
     // const browser = await chromium.launch({
@@ -40,6 +40,16 @@ export const southwestAirlines = async (
     const context = await browser.newContext();
     const page = await context.newPage();
     await page.goto(SOUTH_WEST_REFUND_LINK);
+
+    const cdp = await page.context().newCDPSession(page);
+
+    // @ts-ignore
+    cdp.on("Browserless.captchaFound", () => {
+      res.json({
+        status: "success",
+        message: "Captcha detected!",
+      });
+    });
 
     await page.waitForTimeout(1000);
 
