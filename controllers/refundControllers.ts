@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import { chromium } from "playwright-core";
+import playwright from "playwright";
 import refundSchema from "../schemas/refundSchema";
 import {
   formatDateToSouthwestAirlines,
@@ -30,8 +30,8 @@ export const southwestAirlines = async (
       });
     }
 
-    const browser = await chromium.connectOverCDP(
-      "wss://chrome.browserless.io?token=R3qrs0uAYrwFeO2c83126582824d815033dd6bd7e1"
+    const browser = await playwright.chromium.connectOverCDP(
+      "wss://production-sfo.browserless.io?token=R3qrs0uAYrwFeO2c83126582824d815033dd6bd7e1"
     );
 
     // const browser = await chromium.launch({
