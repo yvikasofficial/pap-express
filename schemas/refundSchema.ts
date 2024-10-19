@@ -5,8 +5,7 @@ const refundSchema = Joi.object({
   airport: Joi.string().length(3).uppercase().required().label("airport"),
   flight_number: Joi.number()
     .integer()
-    .min(4)
-    .max(4)
+    .min(1)
     .required()
     .label("flight_number"),
   confirmation_number: Joi.string()
